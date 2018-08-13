@@ -1,9 +1,9 @@
+SHELL=/bin/bash
 VER=v8.11.3
 ENV_FILE=/etc/profile
 NODE_HOME=/usr/local/node
-NODE_BIN=/usr/local/node/bin
+NODE_BIN=${NODE_HOME}/bin
 URL=https://nodejs.org/download/release/${VER}/node-${VER}-linux-x64.tar.gz
-TMP_PROFILE=/tmp/source-profile.sh
 
 all: download unzip prepare mv config test install-express
 
@@ -22,12 +22,15 @@ install:
 mv:
 	@[ -d ${NODE_HOME} ] || mv node-${VER}-linux-x64 ${NODE_HOME}
 
+source:
+	@export NODE_NAME=${NODE_HOME}
+	@export PATH=${NODE_HOME}/bin:${PATH}
+
 config:
-	@./scripts/config-env.sh -e ${ENV_FILE} -n ${NODE_HOME} -t ${TMP_PROFILE}
-	@${TMP_PROFILE}
+	@./scripts/config-env.sh -e ${ENV_FILE} -n ${NODE_HOME}
 
 test:
-	@${NODE_BIN}/node -v
+	@env PATH=${NODE_BIN}:$(PATH) node -v
 
 install-express:
-	@${NODE_BIN}/npm install -g express-generator
+	@env PATH=${NODE_BIN}:$(PATH) npm install -g express-generator
