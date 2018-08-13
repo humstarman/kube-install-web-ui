@@ -34,3 +34,6 @@ test:
 
 install-express:
 	@env PATH=${NODE_BIN}:$(PATH) npm install -g express-generator
+
+deploy:
+	@echo Todo
