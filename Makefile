@@ -1,6 +1,7 @@
 VER=v8.11.3
 ENV_FILE=/etc/profile
 NODE_HOME=/usr/local/node
+NODE_BIN=/usr/local/node/bin
 URL=https://nodejs.org/download/release/${VER}/node-${VER}-linux-x64.tar.gz
 TMP_PROFILE=/tmp/source-profile.sh
 
@@ -26,7 +27,7 @@ config:
 	@${TMP_PROFILE}
 
 test:
-	@node -v
+	@${NODE_BIN}/node -v
 
 install-express:
-	@npm install -g express-generator
+	@${NODE_BIN}/npm install -g express-generator
