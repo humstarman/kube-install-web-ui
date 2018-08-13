@@ -5,7 +5,7 @@ NODE_HOME=/usr/local/node
 NODE_BIN=${NODE_HOME}/bin
 URL=https://nodejs.org/download/release/${VER}/node-${VER}-linux-x64.tar.gz
 
-all: download unzip prepare mv config test install-express
+all: download unzip mv config test install-express
 
 download:
 	@[ -f node-${VER}-linux-x64.tar.gz ] || curl -O ${URL} 
