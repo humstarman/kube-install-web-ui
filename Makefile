@@ -8,8 +8,10 @@ PORT=3000
 
 all: download unzip mv config test install-express deploy echo
 
+download:export FILE=node-${VER}-linux-x64.tar.gz 
 download:
-	@[ -f node-${VER}-linux-x64.tar.gz ] || curl -O ${URL} 
+	@if [ -f /tmp/${FILE} ]; then yes | cp /tmp/${FILE} ./; fi
+	@[ -f ${FILE} ] || curl -O ${URL} 
 
 unzip:
 	@[ -d node-${VER}-linux-x64 ] || tar -zxvf node-${VER}-linux-x64.tar.gz
@@ -42,4 +44,6 @@ deploy:
 	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) nohup npm start & 
 
 echo:
-	@echo "Visit http://127.0.0.1:${PORT} on your browser."
+	@echo "=========="
+	@echo "Visiting http://127.0.0.1:${PORT} on your browser to start installing Kubernetes."
+	@echo "=========="
