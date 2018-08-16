@@ -6,7 +6,7 @@ NODE_BIN=${NODE_HOME}/bin
 URL=https://nodejs.org/download/release/${VER}/node-${VER}-linux-x64.tar.gz
 PORT=3000
 
-all: download unzip mv config test install-express deploy echo
+all: download unzip mv config test install-express deploy
 
 download:
 	@[ -f node-${VER}-linux-x64.tar.gz ] || curl -O ${URL} 
@@ -37,8 +37,9 @@ install-express:
 	@env PATH=${NODE_BIN}:$(PATH) npm install -g express-generator
 
 deploy:
+	@./scripts/stop-firewall.sh
 	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) npm install
-	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) npm start 
+	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) nohup npm start & 
 
 echo:
 	@echo "Visit http://127.0.0.1:${PORT} on your browser."
