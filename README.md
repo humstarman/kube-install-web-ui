@@ -30,7 +30,7 @@ By default, the service uses port 3000.
 
 ## Clean
 
-Remove the installation of the web, run:
+Remove the installation of the web and stop the service, run:
 ```
 make clean
 ```
