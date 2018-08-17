@@ -47,3 +47,10 @@ echo:
 	@echo "=========="
 	@echo "Visiting http://127.0.0.1:${PORT} on your browser to start installing Kubernetes."
 	@echo "=========="
+
+stop:
+	@./scripts/chk-netstat.sh
+	@./scripts/stop-node.sh -p ${PORT}
+
+clean: stop
+	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) npm uninstall
