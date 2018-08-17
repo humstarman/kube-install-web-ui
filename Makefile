@@ -6,7 +6,7 @@ NODE_BIN=${NODE_HOME}/bin
 URL=https://nodejs.org/download/release/${VER}/node-${VER}-linux-x64.tar.gz
 PORT=3000
 
-all: download unzip mv config test install-express deploy echo
+all: download unzip mv config chk install-express deploy echo
 
 download:export FILE=node-${VER}-linux-x64.tar.gz 
 download:
@@ -32,7 +32,7 @@ source:
 config:
 	@./scripts/config-env.sh -e ${ENV_FILE} -n ${NODE_HOME}
 
-test:
+chk:
 	@env PATH=${NODE_BIN}:$(PATH) node -v
 
 install-express:
@@ -52,5 +52,10 @@ stop:
 	@./scripts/chk-netstat.sh
 	@./scripts/stop-node.sh -p ${PORT}
 
-clean: stop
+clean: stop uninstall
+
+uninstall:
 	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) npm uninstall
+
+test:
+	@curl http://127.0.0.1:${PORT}
