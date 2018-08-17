@@ -14,7 +14,7 @@ download:
 	@[ -f ${FILE} ] || curl -O ${URL} 
 
 unzip:
-	@[ -d node-${VER}-linux-x64 ] || tar -zxvf node-${VER}-linux-x64.tar.gz
+	@[ -d node-${VER}-linux-x64 ] || tar -zxf node-${VER}-linux-x64.tar.gz
 
 prepare:
 	@./scripts/prepare.sh
