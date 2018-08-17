@@ -22,8 +22,17 @@ or:
 ```
 make install
 ```
-> During the installation. firewall would be shudown.
+> Note: during the installation. firewall would be shudown.
 
 ## Visit
 
-By default,
+By default, the service uses port 3000.  
+One can visit the installation web UI.
+
+## Clean
+
+Remove the installation of the web, run:
+```
+make clean
+``
+> Note: this operation will not clean the installed Kubernetes cluster.
