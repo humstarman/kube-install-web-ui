@@ -22,7 +22,7 @@ or:
 ```
 make install
 ```
-
+> During the installation. firewall would be shudown.
 
 ## Visit
 
