@@ -19,7 +19,9 @@ unzip:
 prepare:
 	@./scripts/prepare.sh
 
-install:
+install: all
+
+compile:
 	@cd node-${VER} && ./configure --prefix=${NODE_HOME} && make && make install
 
 mv:
