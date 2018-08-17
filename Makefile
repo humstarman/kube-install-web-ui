@@ -19,6 +19,12 @@ unzip:
 prepare:
 	@./scripts/prepare.sh
 
+cp:
+	@find ./manifests -type f -name "*.sed" | sed s?".sed"?""?g | xargs -I {} cp {}.sed {}
+
+sed:
+	@sed -i s?"{{.port}}"?"${PORT}"?g ./manifests/bin/www
+
 install: all
 
 compile:
@@ -40,7 +46,7 @@ chk:
 install-express:
 	@env PATH=${NODE_BIN}:$(PATH) npm install -g express-generator
 
-deploy:
+deploy: cp sed
 	@./scripts/stop-firewall.sh
 	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) npm install
 	@cd ./manifests && env PATH=${NODE_BIN}:$(PATH) nohup npm start & 
