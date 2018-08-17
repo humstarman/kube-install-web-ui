@@ -27,12 +27,11 @@ make install
 ## Visit
 
 By default, the service uses port 3000.  
-One can visit the installation web UI.
 
 ## Clean
 
 Remove the installation of the web, run:
 ```
 make clean
-``
+```
 > Note: this operation will not clean the installed Kubernetes cluster.
